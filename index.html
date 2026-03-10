@@ -1,1 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valley Crown Barbers | One QR. Full Shop Access.</title>
+  <meta name="description" content="Valley Crown Barbers demo site for GitHub Pages. Scan one QR code to access barbers, bookings, gallery, and shop info." />
+  <style>
+    :root {
+      --black: #0b0b0d;
+      --black-soft: #16161b;
+      --gold: #d4af37;
+      --gold-soft: #f3df9d;
+      --white: #f7f7f7;
+      --muted: #b8b8bf;
+      --border: rgba(212, 175, 55, 0.35);
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      --radius: 16px;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1d1d22 0%, var(--black) 40%);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      margin-bottom: 16px;
+      color: var(--gold-soft);
+      letter-spacing: 0.3px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 760px;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 82vh;
+      display: grid;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(140deg, rgba(212, 175, 55, 0.08), transparent 55%),
+        radial-gradient(circle at 80% 25%, rgba(243, 223, 157, 0.1), transparent 35%);
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 84px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--border);
+      color: var(--gold-soft);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 26px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+      background: transparent;
+      color: var(--white);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #1f1a0b;
+    }
+
+    .hero-card {
+      background: linear-gradient(155deg, #19191f, #111114);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      color: var(--gold-soft);
+    }
+
+    .hero-card ul {
+      list-style: none;
+      color: var(--muted);
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    /* Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .barber-card {
+      background: linear-gradient(160deg, var(--black-soft), #101014);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .chair {
+      font-size: 0.8rem;
+      color: var(--gold-soft);
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .barber-name {
+      font-size: 1.2rem;
+      margin-bottom: 2px;
+    }
+
+    .specialty {
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .stat {
+      font-size: 0.92rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      color: var(--gold-soft);
+      margin-right: 6px;
+      font-weight: 600;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .btn-sm {
+      width: 100%;
+      text-align: center;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .media-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      min-height: 150px;
+      background: #1b1b21;
+    }
+
+    .media-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.1);
+    }
+
+    .media-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 0.72rem;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    /* Shop & Contact */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      background: linear-gradient(160deg, #17171d, #121216);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .panel h3 {
+      margin-bottom: 12px;
+      color: var(--gold-soft);
+    }
+
+    .panel p,
+    .panel li {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .panel ul {
+      padding-left: 18px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      background: #101014;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: var(--white);
+      padding: 10px 12px;
+      font: inherit;
+    }
+
+    .contact-form textarea { min-height: 98px; resize: vertical; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      padding: 20px 0 30px;
+      font-size: 0.86rem;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(3px);
+      z-index: 99;
+      padding: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(620px, 96vw);
+      background: linear-gradient(150deg, #1b1b23, #111114);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-content h3 {
+      color: var(--gold-soft);
+      margin-bottom: 8px;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    @media (max-width: 960px) {
+      .hero-wrap,
+      .two-col { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .section { padding: 52px 0; }
+      .cards-grid,
+      .gallery-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .hero-wrap { padding: 60px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <span class="tag">Valley Barber Shop Demo</span>
+        <h1>One QR Code. Full Access to the Entire Barber Shop Experience.</h1>
+        <p>
+          Scan once and customers instantly get barber availability by chair, social links, profile details,
+          haircut gallery previews, and booking/contact options—no app required.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#barbers">Browse Barbers</a>
+          <a class="btn" href="#booking">Book a Slot</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <h2>QR Access Includes</h2>
+        <ul>
+          <li>• Live-style chair roster with open spots</li>
+          <li>• Quick links to each barber's social media</li>
+          <li>• Profile popups with specialties & experience</li>
+          <li>• Portfolio preview for photos and videos</li>
+          <li>• Booking and contact details in one page</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="barbers">
+      <div class="container">
+        <h2 class="section-title">Barber ID Cards by Chair</h2>
+        <p class="section-subtitle">Choose your chair, review specialties, and tap through to social, booking, or detailed profile info.</p>
+        <div class="cards-grid">
+          <article class="barber-card">
+            <p class="chair">Chair 1</p>
+            <h3 class="barber-name">Miguel "FadeMaster" Reyes</h3>
+            <p class="specialty">Specialty: Skin fades, taper designs, crisp line-ups</p>
+            <p class="stat"><span>Open spots:</span> 3 today</p>
+            <p class="stat"><span>Schedule:</span> Tue–Sat · 9:00 AM – 6:00 PM</p>
+            <div class="card-actions">
+              <a class="btn btn-sm" href="#" aria-label="Miguel social media">Social Media</a>
+              <a class="btn btn-sm btn-primary" href="#booking">Book with Miguel</a>
+              <button class="btn btn-sm" data-modal="modal-miguel">View Profile</button>
+            </div>
+          </article>
+
+          <article class="barber-card">
+            <p class="chair">Chair 2</p>
+            <h3 class="barber-name">Andre "Blade" Collins</h3>
+            <p class="specialty">Specialty: Beard sculpting, executive cuts, hot towel shaves</p>
+            <p class="stat"><span>Open spots:</span> 2 today</p>
+            <p class="stat"><span>Schedule:</span> Mon–Fri · 11:00 AM – 8:00 PM</p>
+            <div class="card-actions">
+              <a class="btn btn-sm" href="#" aria-label="Andre social media">Social Media</a>
+              <a class="btn btn-sm btn-primary" href="#booking">Book with Andre</a>
+              <button class="btn btn-sm" data-modal="modal-andre">View Profile</button>
+            </div>
+          </article>
+
+          <article class="barber-card">
+            <p class="chair">Chair 3</p>
+            <h3 class="barber-name">Sara "Texture" Nguyen</h3>
+            <p class="specialty">Specialty: Curly texture cuts, modern crops, kids cuts</p>
+            <p class="stat"><span>Open spots:</span> 4 today</p>
+            <p class="stat"><span>Schedule:</span> Wed–Sun · 10:00 AM – 7:00 PM</p>
+            <div class="card-actions">
+              <a class="btn btn-sm" href="#" aria-label="Sara social media">Social Media</a>
+              <a class="btn btn-sm btn-primary" href="#booking">Book with Sara</a>
+              <button class="btn btn-sm" data-modal="modal-sara">View Profile</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <h2 class="section-title">Portfolio / Gallery Preview</h2>
+        <p class="section-subtitle">A quick look at haircut photos and short-form video clips. Replace placeholders with your real work anytime.</p>
+        <div class="gallery-grid">
+          <figure class="media-card">
+            <span class="media-tag">Photo</span>
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80" alt="Sharp fade haircut result" />
+          </figure>
+          <figure class="media-card">
+            <span class="media-tag">Photo</span>
+            <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80" alt="Barber trimming beard close-up" />
+          </figure>
+          <figure class="media-card">
+            <span class="media-tag">Video Preview</span>
+            <img src="https://images.unsplash.com/photo-1593702288056-fd3ea7f0709a?auto=format&fit=crop&w=900&q=80" alt="Clip preview of barber at work" />
+          </figure>
+          <figure class="media-card">
+            <span class="media-tag">Video Preview</span>
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80" alt="Close-up of clippers and styling" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop-info">
+      <div class="container two-col">
+        <article class="panel">
+          <h3>Shop Info</h3>
+          <p>Valley Crown Barbers is a modern neighborhood shop focused on precision, consistency, and community.</p>
+          <ul>
+            <li><strong>Address:</strong> 218 Valley Blvd, Riverbend, CA 91000</li>
+            <li><strong>Hours:</strong> Mon–Sat 9:00 AM – 8:00 PM · Sun 10:00 AM – 4:00 PM</li>
+            <li><strong>Walk-ins:</strong> Welcome when chairs are open</li>
+            <li><strong>Services:</strong> Fades, beard work, line-ups, kids cuts, hot towel shave</li>
+            <li><strong>Parking:</strong> Free lot behind building</li>
+          </ul>
+        </article>
+
+        <article class="panel" id="booking">
+          <h3>Booking & Contact</h3>
+          <p>This demo form is static for GitHub Pages. Connect it to your preferred no-backend service later if needed.</p>
+          <form class="contact-form" action="#" method="post">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <select name="barber" required>
+              <option value="">Choose Barber</option>
+              <option>Miguel "FadeMaster" Reyes</option>
+              <option>Andre "Blade" Collins</option>
+              <option>Sara "Texture" Nguyen</option>
+            </select>
+            <textarea name="message" placeholder="Preferred day/time, haircut style, and notes"></textarea>
+            <button class="btn btn-primary" type="submit">Submit Booking Request</button>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modals -->
+  <div class="modal" id="modal-miguel" aria-hidden="true" role="dialog" aria-labelledby="miguel-title">
+    <div class="modal-content">
+      <button class="close-btn" data-close aria-label="Close profile">×</button>
+      <h3 id="miguel-title">Miguel "FadeMaster" Reyes</h3>
+      <p><strong>Experience:</strong> 9 years · <strong>Focus:</strong> flawless gradients and custom line design.</p>
+      <p>Miguel is known for clean transitions and consistent precision. Perfect for clients who want modern fades with long-lasting structure.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-andre" aria-hidden="true" role="dialog" aria-labelledby="andre-title">
+    <div class="modal-content">
+      <button class="close-btn" data-close aria-label="Close profile">×</button>
+      <h3 id="andre-title">Andre "Blade" Collins</h3>
+      <p><strong>Experience:</strong> 12 years · <strong>Focus:</strong> professional cuts, beard architecture, and grooming routines.</p>
+      <p>Andre specializes in executive-ready looks and beard symmetry. Great choice for a polished style that grows out clean.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-sara" aria-hidden="true" role="dialog" aria-labelledby="sara-title">
+    <div class="modal-content">
+      <button class="close-btn" data-close aria-label="Close profile">×</button>
+      <h3 id="sara-title">Sara "Texture" Nguyen</h3>
+      <p><strong>Experience:</strong> 7 years · <strong>Focus:</strong> textured finishes, curly hair shaping, and family-friendly cuts.</p>
+      <p>Sara balances style and manageability, helping clients keep definition and movement between appointments.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      Valley Crown Barbers · Demo single-file static website for GitHub Pages
+    </div>
+  </footer>
+
+  <script>
+    const modalButtons = document.querySelectorAll('[data-modal]');
+    const closeButtons = document.querySelectorAll('[data-close]');
+    const modals = document.querySelectorAll('.modal');
+
+    function closeModal(modal) {
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    modalButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.modal);
+        if (!target) return;
+        target.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal');
+        if (modal) closeModal(modal);
+      });
+    });
+
+    modals.forEach((modal) => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(modal);
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modals.forEach((modal) => {
+          if (modal.getAttribute('aria-hidden') === 'false') closeModal(modal);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
