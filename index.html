@@ -148,6 +148,44 @@
       margin-top: 12px;
     }
 
+    /* Open spots */
+    .open-spots-panel {
+      background: linear-gradient(155deg, #121218, #0d0d12);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 0 28px rgba(212, 175, 55, 0.14);
+    }
+
+    .open-spots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .spot-card {
+      background: linear-gradient(160deg, #1a1a22, #101015);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(243, 223, 157, 0.08), 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+
+    .spot-time {
+      margin-top: 8px;
+      margin-bottom: 12px;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+
+    .spot-time span {
+      color: var(--gold-soft);
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
     /* Cards */
     .cards-grid {
       display: grid;
@@ -350,12 +388,14 @@
     @media (max-width: 960px) {
       .hero-wrap,
       .two-col { grid-template-columns: 1fr; }
+      .open-spots-grid,
       .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 620px) {
       .section { padding: 52px 0; }
+      .open-spots-grid,
       .cards-grid,
       .gallery-grid { grid-template-columns: 1fr; }
       .hero { min-height: auto; }
@@ -392,6 +432,46 @@
   </header>
 
   <main>
+    <section class="section" id="open-spots">
+      <div class="container">
+        <div class="open-spots-panel">
+          <h2 class="section-title">🔥 Today's Open Spots</h2>
+          <p class="section-subtitle">Customers can instantly see which barber has the next available appointment.</p>
+          <div class="open-spots-grid">
+            <article class="spot-card">
+              <p class="chair">Chair 1</p>
+              <h3 class="barber-name">Miguel "FadeMaster" Reyes</h3>
+              <p class="spot-time"><span>Next Opening:</span> 2:30 PM</p>
+              <div class="card-actions">
+                <a class="btn btn-sm btn-primary" href="#booking">Book Now</a>
+                <button class="btn btn-sm" data-modal="modal-miguel">View Profile</button>
+              </div>
+            </article>
+
+            <article class="spot-card">
+              <p class="chair">Chair 2</p>
+              <h3 class="barber-name">Andre "Blade" Collins</h3>
+              <p class="spot-time"><span>Next Opening:</span> 1:00 PM</p>
+              <div class="card-actions">
+                <a class="btn btn-sm btn-primary" href="#booking">Book Now</a>
+                <button class="btn btn-sm" data-modal="modal-andre">View Profile</button>
+              </div>
+            </article>
+
+            <article class="spot-card">
+              <p class="chair">Chair 3</p>
+              <h3 class="barber-name">Sara "Texture" Nguyen</h3>
+              <p class="spot-time"><span>Next Opening:</span> 5:20 PM</p>
+              <div class="card-actions">
+                <a class="btn btn-sm btn-primary" href="#booking">Book Now</a>
+                <button class="btn btn-sm" data-modal="modal-sara">View Profile</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="barbers">
       <div class="container">
         <h2 class="section-title">Barber ID Cards by Chair</h2>
